@@ -1,41 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<FrameLayout android:id="@+id/my_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical" >
-
-    <TextView android:id="@+id/simpleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AbhiAndroid" />
-
+    android:layout_height="0dip"
+    android:layout_weight="1">
+    <!-- Your content here -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-    >
+        >
 
         <EditText
             android:id="@+id/plain_text_input"
             android:layout_height="100px"
-            android:inputType="text|textNoSuggestions"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:layout_width="match_parent"
             android:background="@drawable/custom_edittext_background"
+            android:paddingLeft="20px"
 
             />
-        <Button
-            android:id="@+id/colorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:text="color me" />
 
     </LinearLayout>
+</FrameLayout>
 
+<LinearLayout
+    android:orientation="horizontal"
+    android:id="@+id/my_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-
+    <Button
+        android:id="@+id/button_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="move"
+        />
+    <Button
+        android:id="@+id/button_indent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="indent"
+        />
+</LinearLayout>
 
 </LinearLayout>
