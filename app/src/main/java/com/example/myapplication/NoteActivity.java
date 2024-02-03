@@ -8,16 +8,15 @@ import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.myapplication.databinding.NoteMainBinding;
+import com.example.myapplication.databinding.ActivityNoteBinding;
 
 public class NoteActivity extends AppCompatActivity {
 
-    private NoteMainBinding binding;
+    private ActivityNoteBinding binding;
 
     private EditText textView;
 
@@ -26,7 +25,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_main);
+        setContentView(R.layout.activity_note);
 
         textView = findViewById(R.id.plain_text_input);
         colorButton = findViewById(R.id.colorButton);

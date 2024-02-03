@@ -27,15 +27,18 @@
 
             />
         <Button
-            android:id="@+id/colorButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/textOptionButton"
+            android:layout_width="65px"
             android:layout_height="wrap_content"
-
-            android:text="color me" />
+             />
 
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/colorButton"
+        android:layout_width="5px"
+        android:layout_height="wrap_content"
+        android:text="color me" />
 
 
 </LinearLayout>

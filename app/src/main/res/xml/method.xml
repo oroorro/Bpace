@@ -1,0 +1,9 @@
+
+<!-- method.xml -->
+<input-method xmlns:android="http://schemas.android.com/apk/res/android">
+    <subtype
+        android:label="Custom Keyboard"
+        android:imeSubtypeLocale="en_US"
+        android:imeSubtypeMode="keyboard"
+        android:subtypeId="@+id/keyboard" />
+</input-method>

@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         binding.openButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+//                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+//                startActivity(intent);
+                Intent intent = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
                 startActivity(intent);
             }
         });
