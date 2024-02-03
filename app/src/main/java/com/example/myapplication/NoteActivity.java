@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Spannable;
 import android.text.style.BackgroundColorSpan;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.databinding.NoteMainBinding;
 
@@ -28,6 +30,10 @@ public class NoteActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.plain_text_input);
         colorButton = findViewById(R.id.colorButton);
+
+        textView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        textView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.custom_edittext_background));
+
 
         colorButton.setOnClickListener(new Button.OnClickListener(){
             @Override

@@ -11,19 +11,30 @@
         android:layout_height="wrap_content"
         android:text="AbhiAndroid" />
 
-    <EditText
-        android:id="@+id/plain_text_input"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:inputType="text"
-        android:background="#4B94EA8A"
-        />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+    >
 
-    <Button
-        android:id="@+id/colorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/plain_text_input"
+            android:layout_height="100px"
+            android:inputType="text|textNoSuggestions"
+            android:layout_width="match_parent"
+            android:background="@drawable/custom_edittext_background"
 
-        android:text="color me" />
+            />
+        <Button
+            android:id="@+id/colorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="color me" />
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
