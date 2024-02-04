@@ -23,7 +23,7 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:background="@drawable/custom_edittext_background"
             android:paddingLeft="20px"
-
+            android:imeOptions="actionGo"
             />
 
 
