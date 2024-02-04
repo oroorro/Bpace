@@ -31,7 +31,8 @@ public class NoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.note_main);
+        binding = NoteMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         edittextView = binding.plainTextInput;
 //        colorButton = findViewById(R.id.colorButton);
