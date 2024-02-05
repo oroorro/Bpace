@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout android:id="@+id/my_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/linearWrapperTest"
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearContentTest_1"
+            >
+            <EditText
+                android:id="@+id/plain_text_input_test_1"
+                android:layout_height="100px"
+                android:inputType="textVisiblePassword|textNoSuggestions"
+                android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:paddingLeft="20px"/>
+
+        </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linearContentTest_2"
+                >
+
+
+                <com.example.myapplication.CustomShapeView
+                    android:layout_width="20dp"
+                    android:layout_height="100px"
+                    android:background="#FFFFFF" />
+
+
+                <EditText
+                    android:id="@+id/plain_text_input_test_2"
+                    android:layout_height="100px"
+                    android:inputType="textVisiblePassword|textNoSuggestions"
+                    android:layout_width="match_parent"
+                    android:background="@color/material_dynamic_primary40"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:paddingLeft="20px"/>
+
+
+
+
+            </LinearLayout>
+
+            <com.example.myapplication.CustomShapeView
+                android:id="@+id/package_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="10px"
+                android:background="#FFFFFF" />
+            
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- Your toolbar items here -->
+    </LinearLayout>
+
+</LinearLayout>
