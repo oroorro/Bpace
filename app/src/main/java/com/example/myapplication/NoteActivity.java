@@ -78,7 +78,7 @@ public class NoteActivity extends AppCompatActivity {
 
                 if(index != 0){
                     //getting reference of currentEdittext's above editText and naming as siblingEditText
-                    EditText siblingEditText = binding.linearContent.findViewById(index - 1);
+                    EditText siblingEditText = (EditText) binding.linearContent.getChildAt(index - 1);
                     //getting siblingEditText's background color
                     Drawable siblingEditTextBackgrnd = siblingEditText.getBackground();
 
