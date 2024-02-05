@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -22,14 +24,14 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private String[] colorList = {
-            "#FF0000",
-            "#00FF00",
-            "#0000FF",
-            "#FFFF00",
-            "#FF00FF",
-            "#00FFFF",
-            "#FFA500",
-            "#FFFFFF",
+            "#FF0000", //Red
+            "#00FF00", //Green
+            "#0000FF", //Blue
+            "#FFFF00", //Yellow
+            "#FF00FF", //Magenta
+            "#00FFFF", //Cyan
+            "#FFA500", //Orange
+            "#FFFFFF", //White
     };
 
     //used to rotate colors for colorList
@@ -71,6 +73,33 @@ public class NoteActivity extends AppCompatActivity {
         binding.buttonIndent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
+                //get currentEdittext's above editText's color
+                int index = binding.linearContent.indexOfChild(currentEdittext);
+
+                if(index != 0){
+                    //getting reference of currentEdittext's above editText and naming as siblingEditText
+                    EditText siblingEditText = binding.linearContent.findViewById(index - 1);
+                    //getting siblingEditText's background color
+                    Drawable siblingEditTextBackgrnd = siblingEditText.getBackground();
+
+                    ColorDrawable colorDrawable = (ColorDrawable) siblingEditTextBackgrnd;
+                    int backgroundColor = colorDrawable.getColor();
+
+                    // Now you can use backgroundColor to access the color
+                    String hexColor = String.format("#%06X", (0xFFFFFF & backgroundColor));
+
+                    // Print the color value
+                    Log.d("BackgroundColor", "Background color: " + hexColor + " index: " + index);
+                }
+                //make a new LinearLayout with horizontal orientation
+
+
+                //place a new IndentBlockView left to currentEdittext
+                //into newly created LinearLayout
+
+
+                //insert IndentBlockView with width of parent_match after currentEdittext
+                //inside linearContent; LinearLayout
             }
 
         });
