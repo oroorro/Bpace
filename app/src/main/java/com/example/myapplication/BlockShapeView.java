@@ -7,21 +7,21 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CustomShapeView extends View {
+public class BlockShapeView extends View {
 
     private Paint paint;
 
-    public CustomShapeView(Context context) {
+    public BlockShapeView(Context context) {
         super(context);
         init();
     }
 
-    public CustomShapeView(Context context, AttributeSet attrs) {
+    public BlockShapeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomShapeView(Context context, AttributeSet attrs, int defStyle) {
+    public BlockShapeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }

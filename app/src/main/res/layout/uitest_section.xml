@@ -44,7 +44,7 @@
                 >
 
 
-                <com.example.myapplication.CustomShapeView
+                <com.example.myapplication.BlockShapeView
                     android:layout_width="20dp"
                     android:layout_height="100px"
                     android:background="#FFFFFF" />
@@ -65,7 +65,7 @@
 
             </LinearLayout>
 
-            <com.example.myapplication.CustomShapeView
+            <com.example.myapplication.BlockShapeView
                 android:id="@+id/package_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="10px"

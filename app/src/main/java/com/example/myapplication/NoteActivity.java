@@ -50,9 +50,6 @@ public class NoteActivity extends AppCompatActivity {
         edittextView = binding.plainTextInput;
         edittextView.setMaxWidth(10);
 
-        //edittextView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        //edittextView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.custom_edittext_background));
-
 
         /**
          * new line triggered key listner to edittextView
@@ -75,6 +72,9 @@ public class NoteActivity extends AppCompatActivity {
 
                 //get currentEdittext's above editText's color
                 int index = binding.linearContent.indexOfChild(currentEdittext);
+                String hexColor;
+
+                int siblingEditTextColor = 0;
 
                 if(index != 0){
                     //getting reference of currentEdittext's above editText and naming as siblingEditText
@@ -83,23 +83,56 @@ public class NoteActivity extends AppCompatActivity {
                     Drawable siblingEditTextBackgrnd = siblingEditText.getBackground();
 
                     ColorDrawable colorDrawable = (ColorDrawable) siblingEditTextBackgrnd;
-                    int backgroundColor = colorDrawable.getColor();
+                    siblingEditTextColor = colorDrawable.getColor();
 
-                    // Now you can use backgroundColor to access the color
-                    String hexColor = String.format("#%06X", (0xFFFFFF & backgroundColor));
 
-                    // Print the color value
-                    Log.d("BackgroundColor", "Background color: " + hexColor + " index: " + index);
+                    // Print the color value to check, prints the correct color
+                    //hexColor = String.format("#%06X", (0xFFFFFF & siblingEditTextColor));
+                    //Log.d("BackgroundColor", "Background color: " + hexColor + " index: " + index);
                 }
-                //make a new LinearLayout with horizontal orientation
 
+                //make a new LinearLayout with horizontal orientation
+                LinearLayout indentContainer = new LinearLayout(NoteActivity.this);
+
+                //creating custom block
+                BlockShapeView blockOnLeft = new BlockShapeView(NoteActivity.this);
+                //setting style for blockOnLeft
+                //height,width and color
+                blockOnLeft.setLayoutParams(new LinearLayout.LayoutParams(
+                        20,
+                        100
+                ));
+
+                hexColor = String.format("#%06X", (0xFFFFFF & siblingEditTextColor));
+                //Log.d("BackgroundColor", "Background color: " + hexColor + "|" + siblingEditTextColor);
+
+                blockOnLeft.setBackgroundColor(Color.parseColor(hexColor));
+
+                binding.linearContent.removeView(currentEdittext);
 
                 //place a new IndentBlockView left to currentEdittext
-                //into newly created LinearLayout
+                indentContainer.addView(blockOnLeft);
+                //insert currentEdittext into newly created LinearLayout
+                indentContainer.addView(currentEdittext);
+
+                //insert newly created LinearLayout at currentEdittext index
 
 
-                //insert IndentBlockView with width of parent_match after currentEdittext
-                //inside linearContent; LinearLayout
+                //creating custom block that will be placed bottom of indentContainer
+                BlockShapeView blockOnBottom = new BlockShapeView(NoteActivity.this);
+
+                blockOnBottom.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        20
+                ));
+
+                blockOnBottom.setBackgroundColor(Color.parseColor(hexColor));
+
+                //insert customshapeview
+                binding.linearContent.addView(indentContainer, index);
+                //then insert blockOnBottom right below indentContainer
+                binding.linearContent.addView(blockOnBottom, index + 1);
+
             }
 
         });
@@ -136,7 +169,7 @@ public class NoteActivity extends AppCompatActivity {
         //created editTextId for newEditText
 
         //int newEditTextId = View.generateViewId();
-        newEditText.setId(editTextCount);
+        newEditText.setId(View.generateViewId());
         newEditText.setMaxLines(1);
         newEditText.setBackgroundColor(Color.parseColor(colorList[colorIndex % 8]));
         colorIndex++;
@@ -155,6 +188,7 @@ public class NoteActivity extends AppCompatActivity {
         });
 
         //adds focusListener to newly created editText
+        //this focusListener will make focused editText to be currentEdittext
         newEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -166,7 +200,7 @@ public class NoteActivity extends AppCompatActivity {
         });
 
 
-        editTextCount++;
+        //editTextCount++;
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearContent);
         //getting index of triggeredEditText
