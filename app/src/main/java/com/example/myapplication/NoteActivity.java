@@ -1,19 +1,22 @@
 package com.example.myapplication;
 
+import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.databinding.NoteMainBinding;
 
-public class NoteActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity implements View.OnTouchListener, View.OnDragListener{
 
     private NoteMainBinding binding;
 
@@ -22,6 +25,7 @@ public class NoteActivity extends AppCompatActivity {
     //saves reference to currently focused editText
     private EditText currentEdittext;
 
+    private boolean moveFlag = false;
 
     private String[] colorList = {
             "#FF0000", //Red
@@ -32,6 +36,11 @@ public class NoteActivity extends AppCompatActivity {
             "#00FFFF", //Cyan
             "#FFA500", //Orange
             "#FFFFFF", //White
+    };
+
+
+    private String[] colorRes = {
+
     };
 
     //used to rotate colors for colorList
@@ -50,6 +59,9 @@ public class NoteActivity extends AppCompatActivity {
         edittextView = binding.plainTextInput;
         edittextView.setMaxWidth(10);
 
+        //edittextView.setOnClickListener(null);
+        edittextView.setOnTouchListener(this);
+        edittextView.setOnDragListener(this);
 
         /**
          * new line triggered key listner to edittextView
@@ -64,6 +76,15 @@ public class NoteActivity extends AppCompatActivity {
                 }
                 return false;
             }
+        });
+
+
+
+        binding.buttonMove.setOnClickListener(new View.OnClickListener(){
+                  public void onClick(View view) {
+                      Log.d("moveFlag", "moveflag");
+                      moveFlag = true;
+                  }
         });
 
         //indent button will cause the currently focused editText to become a part of the editText above it
@@ -95,7 +116,7 @@ public class NoteActivity extends AppCompatActivity {
                 LinearLayout indentContainer = new LinearLayout(NoteActivity.this);
 
                 //creating custom block
-                BlockShapeView blockOnLeft = new BlockShapeView(NoteActivity.this);
+                View blockOnLeft = new View(NoteActivity.this);
                 //setting style for blockOnLeft
                 //height,width and color
                 blockOnLeft.setLayoutParams(new LinearLayout.LayoutParams(
@@ -107,6 +128,7 @@ public class NoteActivity extends AppCompatActivity {
                 //Log.d("BackgroundColor", "Background color: " + hexColor + "|" + siblingEditTextColor);
 
                 blockOnLeft.setBackgroundColor(Color.parseColor(hexColor));
+                //blockOnLeft.setBackgroundColor(getColor(R.color.y_blue));
 
                 binding.linearContent.removeView(currentEdittext);
 
@@ -127,7 +149,7 @@ public class NoteActivity extends AppCompatActivity {
                 ));
 
                 blockOnBottom.setBackgroundColor(Color.parseColor(hexColor));
-
+                //blockOnBottom.setBackgroundColor(getColor(R.color.y_blue));
                 //insert customshapeview
                 binding.linearContent.addView(indentContainer, index);
                 //then insert blockOnBottom right below indentContainer
@@ -157,7 +179,7 @@ public class NoteActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 100
         ));
-        newEditText.setHint("hello");
+
         newEditText.setPadding(0,0,0,40);
         newEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 
@@ -207,6 +229,50 @@ public class NoteActivity extends AppCompatActivity {
         int index = layout.indexOfChild(triggeredEditText);
         //placing newly created editText right next to triggeredEditText
         layout.addView(newEditText,index + 1);
+    }
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // Start dragging when ACTION_DOWN is detected
+
+            if(moveFlag){
+                ClipData clipData = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(edittextView);
+                edittextView.startDragAndDrop(clipData, shadowBuilder, edittextView, 0);
+                moveFlag = false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onDrag(View v, DragEvent event) {
+        final int action = event.getAction();
+        switch (action) {
+            case DragEvent.ACTION_DRAG_STARTED:
+                // Initialize the drag operation
+                return true;
+            case DragEvent.ACTION_DROP:
+                // Handle the drop
+                View draggedView = (View) event.getLocalState();
+                if (v instanceof EditText) {
+                    // Logic to handle drop on EditText
+                    // For example, you might want to append text or move the cursor position.
+                    EditText targetEditText = (EditText) v;
+                    // Perform your actions here
+                } else {
+                    // Handle other drop targets
+                }
+                return true;
+            case DragEvent.ACTION_DRAG_ENDED:
+                // Clean up after the drag operation
+                return true;
+            default:
+                break;
+        }
+        return false;
     }
 
 }
