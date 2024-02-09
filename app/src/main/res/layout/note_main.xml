@@ -53,6 +53,12 @@ android:id="@+id/linear_main"
         android:layout_height="wrap_content"
         android:text="indent"
         />
+    <Button
+        android:id="@+id/button_block_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        />
 </LinearLayout>
 
 </LinearLayout>

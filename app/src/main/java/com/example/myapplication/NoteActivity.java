@@ -87,13 +87,33 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
                   }
         });
 
+        binding.buttonBlockTest.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                int index = binding.linearContent.indexOfChild(currentEdittext);
+                binding.linearContent.removeView(currentEdittext);
+                EditText siblingEditText = (EditText) binding.linearContent.getChildAt(index - 1);
+                //getting siblingEditText's background color
+                Drawable siblingEditTextBackgrnd = siblingEditText.getBackground();
+
+                ColorDrawable colorDrawable = (ColorDrawable) siblingEditTextBackgrnd;
+                int siblingEditTextColor = colorDrawable.getColor();
+                InclusiveBlock inBlock = new InclusiveBlock(siblingEditTextColor, currentEdittext, NoteActivity.this);
+
+                //add InclusiveBlock to currentEdittext's index in linearContent layout
+                binding.linearContent.addView(inBlock, index);
+
+            }
+        });
+
         //indent button will cause the currently focused editText to become a part of the editText above it
         binding.buttonIndent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
+
                 //get currentEdittext's above editText's color
                 int index = binding.linearContent.indexOfChild(currentEdittext);
                 String hexColor;
+
 
                 int siblingEditTextColor = 0;
 
