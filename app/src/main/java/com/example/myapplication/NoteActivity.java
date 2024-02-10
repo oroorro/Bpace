@@ -11,6 +11,8 @@ import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -202,7 +204,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
 
         newEditText.setPadding(0,0,0,40);
         newEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-
+        newEditText.setTag("editText_created" + colorIndex++);
         //setting maxWidth for new editText same as parent;linearContentLayout
         int parentWidth = binding.linearContent.getWidth();
         Log.i("parentWidth",""+parentWidth);
@@ -236,7 +238,26 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
             public void onFocusChange(View v, boolean hasFocus) {
                 //when focused make that editText to be currentEdittext
                 if (hasFocus) {
+
+                    //check if it has parent of BlockShapeView
                     currentEdittext = newEditText;
+
+                    Log.d("tag", ""+newEditText.getTag());
+                    Log.d("parent", ""+BlockShapeView.class.isInstance(currentEdittext.getParent()));
+                    Log.d("parent", "parent's class :"+ (currentEdittext.getParent().getClass()));
+                    View p1 = (View)currentEdittext.getParent();
+                    Log.d("parent", "parent id :"+p1.getId());
+                    Log.d("parent", "parent tag is :"+((View) currentEdittext.getParent()).getTag());
+                    //Log.d("parent", findBlockShapeViewName(currentEdittext));
+
+
+                    ViewParent parent = currentEdittext.getParent();
+
+                    ViewGroup p = (ViewGroup)parent;
+
+                    Log.d("parent", "parent's 1st child"+ p.getChildAt(0));
+                    Log.d("parent", "parent's 2nd child"+ p.getChildAt(1));
+                    //Log.d("parent", ""+containParent(BlockShapeView.class, currentEdittext));
                 }
             }
         });
@@ -293,6 +314,39 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
                 break;
         }
         return false;
+    }
+
+
+//    public boolean containParent(Class parent, View child){
+//
+//
+//
+////        if(child == null){
+////            return false;
+////        }
+////
+////        if(parent.isInstance(child.getParent()) ){
+////            return true;
+////        }else{
+//////            while(child.getParent() != null){
+//////                child = (View) child.getParent();
+//////            }
+////            //child = (View) child.getParent();
+////            containParent(parent, child.getParent());
+////        }
+////        return false;
+//
+//    }
+
+    public String findBlockShapeViewName(View child) {
+        ViewParent parent = child.getParent();
+        while (parent instanceof View) {
+            if (parent instanceof BlockShapeView) {
+                return parent.getClass().getSimpleName();
+            }
+            parent = parent.getParent();
+        }
+        return "nothing"; // BlockShapeView was not found in the hierarchy
     }
 
 }
